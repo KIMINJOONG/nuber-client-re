@@ -1,34 +1,36 @@
 {
-  "name": "nuber-client",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@types/react-router-dom": "^5.1.3",
-    "@types/styled-components": "^5.0.0",
-    "apollo-boost": "^0.4.7",
-    "graphql": "^14.6.0",
-    "prop-types": "^15.7.2",
-    "react": "^16.12.0",
-    "react-apollo": "^3.1.3",
-    "react-dom": "^16.12.0",
-    "react-helmet": "^5.2.1",
-    "react-router-dom": "^5.1.2",
-    "react-scripts-ts": "3.1.0",
-    "react-toastify": "^5.5.0",
-    "styled-components": "^5.0.1",
-    "styled-reset": "^4.1.0"
-  },
-  "scripts": {
-    "start": "react-scripts-ts start",
-    "build": "react-scripts-ts build",
-    "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
-  },
-  "devDependencies": {
-    "@types/jest": "^25.1.2",
-    "@types/node": "^13.7.1",
-    "@types/react": "^16.9.19",
-    "@types/react-dom": "^16.9.5",
-    "typescript": "^3.7.5"
-  }
+    "name": "nuber-client",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@types/react-router-dom": "^5.1.3",
+        "@types/styled-components": "^5.0.0",
+        "apollo-boost": "^0.4.7",
+        "graphql": "^14.6.0",
+        "prop-types": "^15.7.2",
+        "react": "^16.12.0",
+        "react-apollo": "^3.1.3",
+        "react-dom": "^16.12.0",
+        "react-helmet": "^5.2.1",
+        "react-router-dom": "^5.1.2",
+        "react-scripts-ts": "3.1.0",
+        "react-toastify": "^5.5.0",
+        "styled-components": "^5.0.1",
+        "styled-reset": "^4.1.0"
+    },
+    "scripts": {
+        "start": "react-scripts-ts start",
+        "build": "react-scripts-ts build",
+        "test": "react-scripts-ts test --env=jsdom",
+        "eject": "react-scripts-ts eject",
+        "precodegen": "npx apollo-codegen introspect-schema http://localhost:4000/graphql --output schema.json",
+        "codegen": "npx apollo codegen:generate src/types/api.d.ts --queries=src/**/*.queries.ts --addTypename --localSchemaFile=schema.json --target typescript --outputFlat"
+    },
+    "devDependencies": {
+        "@types/jest": "^25.1.2",
+        "@types/node": "^13.7.1",
+        "@types/react": "^16.9.19",
+        "@types/react-dom": "^16.9.5",
+        "typescript": "^3.7.5"
+    }
 }
