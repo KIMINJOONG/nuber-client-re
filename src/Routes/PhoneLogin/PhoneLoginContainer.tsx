@@ -36,7 +36,15 @@ class PhoneLoginContainer extends React.Component<
                 variables={{
                     phoneNumber: `${countryCode}${phoneNumber}`
                 }}
-                update={this.afterSubmit}
+                onCompleted={data => {
+                    const data: startPhoneVerification = result.data;
+                    const { StartPhoneVerification } = data;
+                    if (StartPhoneVerification.ok) {
+                        return;
+                    } else {
+                        toast.error(StartPhoneVerification.error);
+                    }
+                }}
             >
                 {(mutation, { loading }) => {
                     const onSubmit: React.FormEventHandler<HTMLFormElement> = event => {
@@ -74,8 +82,6 @@ class PhoneLoginContainer extends React.Component<
             [name]: value
         } as any);
     };
-
-    public afterSubmit: MutationFunction = (cache, data) => {};
 }
 
 export default PhoneLoginContainer;
