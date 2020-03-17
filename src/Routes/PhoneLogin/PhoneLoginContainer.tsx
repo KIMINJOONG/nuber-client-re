@@ -1,5 +1,5 @@
 import React from "react";
-import { Mutation, MutationFunction } from "react-apollo";
+import { Mutation } from "react-apollo";
 import { RouteComponentProps } from "react-router-dom";
 import { toast } from "react-toastify";
 import PhoneLoginPresenter from "./PhoneLoginPresenter";
@@ -38,7 +38,6 @@ class PhoneLoginContainer extends React.Component<
                     phoneNumber: `${countryCode}${phoneNumber}`
                 }}
                 onCompleted={data => {
-                    const data: startPhoneVerification = result.data;
                     const { StartPhoneVerification } = data;
                     const phone = `${countryCode}${phoneNumber}`;
                     if (StartPhoneVerification.ok) {
