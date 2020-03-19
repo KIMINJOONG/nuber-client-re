@@ -1,14 +1,14 @@
 import React from "react";
 
 interface IProps {
-    onSubmit: any;
+    submitFn: any;
 }
 
-const Form: React.SFC<IProps> = ({ onSubmit }) => (
+const Form: React.SFC<IProps> = ({ submitFn }) => (
     <form
         onSubmit={e => {
             e.preventDefault();
-            onSubmit();
+            submitFn();
         }}
     />
 );
