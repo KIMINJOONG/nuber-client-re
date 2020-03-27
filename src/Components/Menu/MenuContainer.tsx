@@ -1,9 +1,20 @@
 import React from "react";
 import MenuPresenter from "./MenuPresenter";
+import { Query } from "react-apollo";
+import { userProfile } from "../../types/api";
+import { USER_PROFILE } from "src/sharedQueries";
+
+class ProfileQuery extends Query<userProfile> {}
 
 class MenuContainer extends React.Component {
     public render() {
-        return <MenuPresenter />;
+        return (
+            <ProfileQuery query={USER_PROFILE}>
+                {({ data, loading }) => (
+                    <MenuPresenter data={data} loading={loading} />
+                )}
+            </ProfileQuery>
+        );
     }
 }
 

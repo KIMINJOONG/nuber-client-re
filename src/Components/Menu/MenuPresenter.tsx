@@ -1,6 +1,7 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import styled from "../../type-components";
+import { userProfile } from "src/types/api";
 
 const Container = styled.div`
     height: 100%;
@@ -58,9 +59,10 @@ const Grid = styled.div`
     align-items: center;
 `;
 
-// interface IToggleProps {
-//     isDriving: boolean;
-// }
+interface IProps {
+    data?: userProfile;
+    loading: boolean;
+}
 
 const ToggleDriving = styled<any>("button")`
     -webkit-appearance: none;
@@ -74,28 +76,36 @@ const ToggleDriving = styled<any>("button")`
     cursor: pointer;
 `;
 
-const MenuPresenter: React.SFC = () => (
+const MenuPresenter: React.SFC<IProps> = ({
+    data: { GetMyProfile: { user = null } = {} } = {},
+    loading
+}) => (
     <Container>
-        <Header>
-            <Grid>
-                <Link to={"/edit-account"}>
-                    <Image
-                        src={
-                            "https://yt3.ggpht.com/-CTwXMuZRaWw/AAAAAAAAAAI/AAAAAAAAAAA/HTJy-KJ4F2c/s88-c-k-no-mo-rj-c0xffffff/photo.jpg"
-                        }
-                    />
-                </Link>
-                <Text>
-                    <Name>Nicolas Serrano Arevalo</Name>
-                    <Rating>4.5</Rating>
-                </Text>
-            </Grid>
-        </Header>
-        <SLink to="/trips">Your Trips</SLink>
-        <SLink to="/settings">Settings</SLink>
-        <ToggleDriving isDriving={true}>
-            {true ? "Stop driving" : "Start driving"}
-        </ToggleDriving>
+        {!loading && user && user.fullName && (
+            <Fragment>
+                <Header>
+                    <Grid>
+                        <Link to={"/edit-account"}>
+                            <Image
+                                src={
+                                    user.profilePhoto ||
+                                    "https://lh3.googleusercontent.com/-CTwXMuZRaWw/AAAAAAAAAAI/AAAAAAAAAUg/8T5nFuIdnHE/photo.jpg"
+                                }
+                            />
+                        </Link>
+                        <Text>
+                            <Name>{user.fullName}</Name>
+                            <Rating>4.5</Rating>
+                        </Text>
+                    </Grid>
+                </Header>
+                <SLink to="/trips">Your Trips</SLink>
+                <SLink to="/settings">Settings</SLink>
+                <ToggleDriving isDriving={user.isDriving}>
+                    {user.isDriving ? "Stop driving" : "Start driving"}
+                </ToggleDriving>
+            </Fragment>
+        )}
     </Container>
 );
 
