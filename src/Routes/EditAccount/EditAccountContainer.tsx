@@ -4,6 +4,8 @@ import { RouteComponentProps } from "react-router-dom";
 import { updateProfile, updateProfileVariables } from "../../types/api";
 import EditAccountPresenter from "./EditAccountPresenter";
 import { UPDATE_PROFILE } from "./EditAccountQueries";
+import { USER_PROFILE } from "src/sharedQueries";
+import { toast } from "react-toastify";
 
 interface IState {
     firstName: string;
@@ -31,6 +33,15 @@ class EditAccountContainer extends React.Component<IProps, IState> {
         return (
             <UpdateProfileMutation
                 mutation={UPDATE_PROFILE}
+                refetchQueries={[{ query: USER_PROFILE }]}
+                onCompleted={data => {
+                    const { UpdateMyProfile } = data;
+                    if (UpdateMyProfile.ok) {
+                        toast.success("Profile updated!");
+                    } else if (UpdateMyProfile.error) {
+                        toast.error(UpdateMyProfile.error);
+                    }
+                }}
                 variables={{
                     email,
                     firstName,
