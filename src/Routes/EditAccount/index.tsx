@@ -1,2 +1,2 @@
-import EditAccountContainer from "./editAccountContainer";
+import EditAccountContainer from "./EditAccountContainer";
 export default EditAccountContainer;

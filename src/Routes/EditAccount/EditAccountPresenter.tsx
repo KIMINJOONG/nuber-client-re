@@ -6,7 +6,6 @@ import Form from "../../Components/Form";
 import Header from "../../Components/Header";
 import Input from "../../Components/Input";
 import styled from "../../type-components";
-import { updateProfile } from "../../types/api";
 
 const Container = styled.div``;
 
@@ -26,6 +25,7 @@ interface IProps {
     onSubmit: MutationFn;
     onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     loading: boolean;
+    uploading: boolean;
 }
 
 const EditAccountPresenter: React.SFC<IProps> = ({
@@ -35,7 +35,8 @@ const EditAccountPresenter: React.SFC<IProps> = ({
     onSubmit,
     profilePhoto,
     onInputChange,
-    loading
+    loading,
+    uploading
 }) => (
     <Container>
         <Helmet>
