@@ -6,6 +6,7 @@ import Form from "../../Components/Form";
 import Header from "../../Components/Header";
 import Input from "../../Components/Input";
 import styled from "../../type-components";
+import { MutationFn } from "react-apollo";
 
 const Container = styled.div`
     padding: 0 40px;
@@ -26,6 +27,7 @@ interface IProps {
     name: string;
     onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     loading: boolean;
+    onSubmit: MutationFn;
 }
 
 const AddPlacePresenter: React.SFC<IProps> = ({
@@ -33,6 +35,7 @@ const AddPlacePresenter: React.SFC<IProps> = ({
     address,
     name,
     loading,
+    onSubmit,
 }) => (
     <React.Fragment>
         <Helmet>
@@ -46,12 +49,14 @@ const AddPlacePresenter: React.SFC<IProps> = ({
                     type={"text"}
                     onChange={onInputChange}
                     value={name}
+                    name={"name"}
                 />
                 <ExtendedInput
                     placeholder={"Address"}
                     type={"text"}
                     onChange={onInputChange}
                     value={address}
+                    name={"address"}
                 />
                 <ExtendedLink to={"/find-address"}>
                     Pick place from map

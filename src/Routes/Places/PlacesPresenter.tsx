@@ -10,9 +10,9 @@ const Container = styled.div`
     padding: 0 40px;
 `;
 
-const SLink = styled(Link)`
-    text-decoration: underline;
-`;
+// const SLink = styled(Link)`
+//     text-decoration: underline;
+// `;
 
 interface IProps {
     data?: getPlaces;
@@ -29,9 +29,7 @@ const PlacesPresenter: React.SFC<IProps> = ({
         </Helmet>
         <Header title={"Places"} backTo={"/"} />
         <Container>
-            {!loading && places && places.length === 0 && (
-                <SLink to={"/add-place"}>Place add some places!</SLink>
-            )}
+            {!loading && places && places.length === 0 && "You have no places"}
             {!loading &&
                 places &&
                 places.map((place) => (
