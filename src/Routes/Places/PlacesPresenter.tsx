@@ -1,6 +1,5 @@
 import React from "react";
 import Helmet from "react-helmet";
-import { Link } from "react-router-dom";
 import Header from "../../Components/Header";
 import Place from "../../Components/Place";
 import styled from "../../type-components";
@@ -35,6 +34,7 @@ const PlacesPresenter: React.SFC<IProps> = ({
                 places.map((place) => (
                     <Place
                         key={place!.id}
+                        id={place!.id}
                         fav={place!.isFav}
                         name={place!.name}
                         address={place!.address}
